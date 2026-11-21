@@ -205,7 +205,7 @@ const cartoonFacts = [
   "Scientifically proven to have the most expressive face and loudest laugh in any room! 😂✨",
   "Warning: Engaging in bak-bak with Cartoon may cause severe loss of track of time! 🗣️⏳",
   "Certified Garba Queen: When the dhol drops, normal human physics no longer applies to her! 💃🔥",
-  "They say negative & positive attract... thank God, because who else could handle all this drama?! 🧲❤️",
+  "They say opposites balance each other out... thank God, because who else could handle all this drama?! 🧲🤝😂",
   "Ability to turn a 2-minute normal story into a 45-minute Bollywood thriller! 🎭🍿",
   "Never pretend you understand her mood swings, just nod, smile, and order snacks! 🍕🥤",
   "The rarest post-school blessing: someone genuinely understanding, loyal, and 100% real. ✨",
@@ -389,12 +389,12 @@ garbaModeBtn.addEventListener('click', () => {
 
 
 // ==========================================
-// 10. TAP TO SEND BIRTHDAY LOVE
+// 10. TAP TO SEND BIRTHDAY CHEER & VIBES
 // ==========================================
 const loveTapBtn = document.getElementById('loveTapBtn');
 const loveBadge = document.getElementById('loveBadge');
 let loveCount = 0;
-const heartSymbols = ['💖', '❤️', '💃', '✨', '⭐', '🎈'];
+const cheerSymbols = ['🎉', '✨', '🎂', '💃', '⭐', '🎈', '🍕', '🤝'];
 
 loveTapBtn.addEventListener('click', (e) => {
   loveCount++;
@@ -403,7 +403,7 @@ loveTapBtn.addEventListener('click', (e) => {
 
   const heart = document.createElement('div');
   heart.className = 'floating-love-heart';
-  heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+  heart.textContent = cheerSymbols[Math.floor(Math.random() * cheerSymbols.length)];
   heart.style.left = `${e.clientX - 15}px`;
   heart.style.top = `${e.clientY - 15}px`;
 
