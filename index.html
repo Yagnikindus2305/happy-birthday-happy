@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAPPYY BIRTHDAY HAPPYY! 🎂✨ (To My Favorite Cartoon)</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Ambience & Floating Elements -->
+  <div class="ambient-layer" id="ambientLayer"></div>
+  <div class="stars-bg"></div>
+
+  <!-- Top Floating Controls -->
+  <header class="top-bar">
+    <div class="audio-pill" id="musicToggleBtn" role="button" tabindex="0">
+      <span class="pulse-dot"></span>
+      <span class="icon">🎵</span>
+      <span class="label">Play Birthday Beat</span>
+    </div>
+    <div class="audio-pill hidden" id="resetBtn" role="button" tabindex="0">
+      <span class="icon">🔄</span>
+      <span class="label">Replay Unboxing</span>
+    </div>
+  </header>
+
+  <!-- Photo Modal for Zooming -->
+  <div class="photo-modal" id="photoModal">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <img id="modalImg" src="" alt="Zoomed Photo" />
+      <p id="modalCaption" class="modal-caption"></p>
+    </div>
+  </div>
+
+  <main class="viewport-wrap">
+
+    <!-- ==============================================
+         STAGE 1: THE UNBOXING MYSTERY PARCEL
+    =============================================== -->
+    <section class="box-stage" id="boxStage">
+      <div class="cosmic-badge">
+        <span class="sparkle">✨</span>
+        <span>PRIORITY SPECIAL DELIVERY</span>
+        <span class="sparkle">✨</span>
+      </div>
+
+      <h2 class="sub-headline">A Special Parcel Just Arrived...</h2>
+      <p class="unbox-prompt">Tap or click the gift box to break the seal!</p>
+
+      <div class="gift-box-wrapper" id="giftBoxContainer" role="button" tabindex="0" aria-label="Open gift box">
+        <div class="gift-box" id="giftBox">
+          
+          <!-- Golden Bow -->
+          <div class="box-bow">
+            <div class="bow-loop bow-left"></div>
+            <div class="bow-knot"></div>
+            <div class="bow-loop bow-right"></div>
+            <div class="bow-tail tail-left"></div>
+            <div class="bow-tail tail-right"></div>
+          </div>
+
+          <!-- Box Lid -->
+          <div class="box-lid" id="boxLid">
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+          </div>
+
+          <!-- Box Body -->
+          <div class="box-body" id="boxBody">
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+            <div class="parcel-tag">
+              <span class="pin">📌</span>
+              <div class="tag-title">AIRMAIL SPECIAL</div>
+              <div class="tag-to">To: <strong>Happy Patel</strong></div>
+              <div class="tag-alias">Alias: <strong>Cartoon 🤪</strong></div>
+              <div class="tag-cta">TAP TO OPEN 🎁</div>
+            </div>
+          </div>
+        </div>
+        <div class="box-glow"></div>
+      </div>
+
+      <div class="hint-arrow">
+        <span>👇 Click the box to begin your surprise!</span>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         STAGE 2: THE FULL CELEBRATION SHOWCASE
+    =============================================== -->
+    <section class="celebration-stage hidden" id="celebrationStage">
+      
+      <!-- GIGANTIC CINEMATIC HEADLINE -->
+      <div class="hero-block">
+        <div class="hero-tag">THE MOST SPECIAL DAY OF THE YEAR</div>
+        <h1 class="mega-title">
+          <span>HAPPYY</span>
+          <span class="highlight">BIRTHDAY</span>
+          <span>HAPPPY!</span>
+        </h1>
+        <p class="hero-subline">
+          To my favorite person, fellow goofball, and the one & only <strong>Cartoon 🤪</strong>
+        </p>
+      </div>
+
+      <!-- FEATURE 1: OPPOSITES ATTRACT / THE BOND STORY -->
+      <div class="glass-card bond-card">
+        <div class="card-kicker">✦ THE PHYSICS OF US ✦</div>
+        <h2 class="card-heading">Negative & Positive Attract 🧲✨</h2>
+        
+        <div class="magnet-visual">
+          <div class="pole pole-neg">
+            <span class="pole-sign">−</span>
+            <span class="pole-label">Polar Opposites</span>
+          </div>
+          <div class="magnet-sparks">
+            <span class="spark s1">⚡</span>
+            <span class="heart-pulse">❤️</span>
+            <span class="spark s2">⚡</span>
+          </div>
+          <div class="pole pole-pos">
+            <span class="pole-sign">+</span>
+            <span class="pole-label">Perfect Match</span>
+          </div>
+        </div>
+
+        <div class="bond-story">
+          <p class="quote-lead">
+            "They always say opposites repel... but in science and in life, 
+            <strong>negative and positive attract</strong>. And with us, it created the most effortless, genuine understanding."
+          </p>
+          <p class="quote-text">
+            Honestly, I thank God so much for the bond we found after school. Finding someone you can be 100% yourself with, 
+            who understands your silence just as well as your chaos, is rare. You became that anchor and that constant laugh I never knew I needed.
+          </p>
+        </div>
+      </div>
+
+      <!-- FEATURE 2: THE INTERACTIVE CAKE -->
+      <div class="glass-card cake-card">
+        <div class="card-kicker">✦ SURPRISE #1: TRADITION ✦</div>
+        <h2 class="card-heading">Blow Your Birthday Candles 🎂</h2>
+        <p class="card-sub">Close your eyes, make your biggest wish for this year, and click the candles!</p>
+
+        <div class="cake-area" id="cakeInteractive" role="button" tabindex="0">
+          <div class="candles-grid">
+            <div class="candle">
+              <div class="flame" id="flame1"></div>
+              <div class="smoke" id="smoke1"></div>
+            </div>
+            <div class="candle">
+              <div class="flame" id="flame2"></div>
+              <div class="smoke" id="smoke2"></div>
+            </div>
+            <div class="candle">
+              <div class="flame" id="flame3"></div>
+              <div class="smoke" id="smoke3"></div>
+            </div>
+          </div>
+
+          <div class="cake-structure">
+            <div class="cake-tier tier-1">
+              <div class="cream-drips"></div>
+            </div>
+            <div class="cake-tier tier-2">
+              <div class="sprinkle-dots"></div>
+            </div>
+            <div class="cake-tier tier-3">
+              <div class="gold-rim"></div>
+            </div>
+            <div class="cake-plate"></div>
+          </div>
+        </div>
+
+        <button class="primary-btn" id="blowBtn">💨 Blow Out The Candles!</button>
+      </div>
+
+      <!-- FEATURE 3: GARBA QUEEN VIDEO SPOTLIGHT -->
+      <div class="glass-card video-card garba-spotlight">
+        <div class="card-kicker">✦ SURPRISE #2: THE ROYAL DANCE FLOOR ✦</div>
+        <div class="garba-title-row">
+          <h2 class="card-heading">The Official Garba Queen 👑💃</h2>
+          <span class="crown-badge">100% Grace & Energy</span>
+        </div>
+        <p class="card-sub">
+          Nobody commands the circle like you! When the dhol beats start, everyone steps aside for the true queen.
+        </p>
+
+        <div class="video-container festive-border">
+          <video 
+            src="assets/garba queen.mp4" 
+            controls 
+            playsinline 
+            loop 
+            preload="metadata"
+            class="styled-video"
+            poster="assets/1.jpeg">
+            Your browser doesn't support HTML5 video.
+          </video>
+        </div>
+        <div class="video-caption">
+          <span>✨ Navratri superstar mode: Activated! ✨</span>
+        </div>
+      </div>
+
+      <!-- FEATURE 4: OUR BAK BAK SESSIONS (MUTED FOR SAFETY!) -->
+      <div class="glass-card video-card bakbak-spotlight">
+        <div class="card-kicker">✦ SURPRISE #3: TOP SECRET ARCHIVES ✦</div>
+        <div class="bakbak-header">
+          <h2 class="card-heading">Our Bak Bak Sessions 💬🤪</h2>
+          <span class="warning-sticker">⚠️ STRICTLY MUTED (Iykyk Scene 💀🤫)</span>
+        </div>
+        <p class="card-sub">
+          Hours of non-stop talk, certified gossip, venting, and pure nonsense. Audio is permanently classified for national security reasons!
+        </p>
+
+        <div class="video-container confidential-border">
+          <!-- strictly muted video as explicitly requested! -->
+          <video 
+            src="assets/our bak bak.mp4" 
+            muted 
+            autoplay 
+            loop 
+            playsinline 
+            preload="metadata"
+            class="styled-video">
+            Your browser doesn't support HTML5 video.
+          </video>
+          <div class="mute-overlay-badge">
+            🔇 Audio Muted By Protocol (IYKYK)
+          </div>
+        </div>
+        <div class="video-caption">
+          <span>🗣️ 99% Bak-Bak, 1% Sense, 100% Unbreakable Connection.</span>
+        </div>
+      </div>
+
+      <!-- FEATURE 5: MEMORY PHOTO GALLERY (PHOTOS 1 to 6) -->
+      <div class="glass-card gallery-card">
+        <div class="card-kicker">✦ SURPRISE #4: THE CARTOON CHRONICLES ✦</div>
+        <h2 class="card-heading">Moments With The Birthday Star 📸</h2>
+        <p class="card-sub">Click any photo to see it in full view!</p>
+
+        <div class="photo-grid">
+          <!-- Photo 1 -->
+          <div class="polaroid-frame" data-src="assets/1.jpeg" data-caption="The radiant smile that brightens any room! ✨">
+            <div class="washi-tape tape-1"></div>
+            <div class="photo-crop">
+              <img src="assets/1.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">The Radiant Smile ✨</div>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="polaroid-frame" data-src="assets/2.jpeg" data-caption="Grace, beauty & elegance at its finest 🌸">
+            <div class="washi-tape tape-2"></div>
+            <div class="photo-crop">
+              <img src="assets/2.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">Simply Stunning 🌸</div>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="polaroid-frame" data-src="assets/3.jpeg" data-caption="Unfiltered Cartoon energy on full display! 🤪">
+            <div class="washi-tape tape-3"></div>
+            <div class="photo-crop">
+              <img src="assets/3.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">Peak Cartoon Vibe 🤪</div>
+          </div>
+
+          <!-- Photo 4 -->
+          <div class="polaroid-frame" data-src="assets/4.jpeg" data-caption="Unmatched poise & style 💫">
+            <div class="washi-tape tape-4"></div>
+            <div class="photo-crop">
+              <img src="assets/4.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">Class & Poise 💫</div>
+          </div>
+
+          <!-- Photo 5 -->
+          <div class="polaroid-frame" data-src="assets/5.jpeg" data-caption="Candid perfection & pure happiness ❤️">
+            <div class="washi-tape tape-5"></div>
+            <div class="photo-crop">
+              <img src="assets/5.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">Candid Happiness ❤️</div>
+          </div>
+
+          <!-- Photo 6 -->
+          <div class="polaroid-frame" data-src="assets/6.jpeg" data-caption="Here's to the queen of the day, Happy Patel! 🥂">
+            <div class="washi-tape tape-6"></div>
+            <div class="photo-crop">
+              <img src="assets/6.jpeg" alt="Happy Patel" loading="lazy" />
+            </div>
+            <div class="polaroid-text">Birthday Royalty 👑</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 6: WAX SEALED HEARTFELT LETTER -->
+      <div class="glass-card letter-section">
+        <div class="card-kicker">✦ SURPRISE #5: FROM THE SOUL ✦</div>
+        <h2 class="card-heading">A Letter For You 💌</h2>
+        <p class="card-sub">Click the wax seal to open your private letter.</p>
+
+        <div class="envelope-outer" id="envelopeWrapper">
+          <div class="envelope-box" id="envelopeBox">
+            <div class="env-flap" id="envFlap"></div>
+            <div class="env-pocket"></div>
+            <div class="wax-stamp" id="waxStamp">H</div>
+
+            <div class="letter-sheet" id="letterSheet">
+              <div class="letter-scroll-area">
+                <div class="letter-salute">Dearest Happy (a.k.a. Cartoon 🤪),</div>
+                
+                <p class="letter-para">
+                  Wishing you the very happiest of birthdays! Looking back at how our bond grew after school, 
+                  it honestly feels like one of the best blessings I could have ever asked for.
+                </p>
+
+                <p class="letter-para">
+                  We always joke about how different we are — polar opposites in so many ways. But that classic saying 
+                  <strong>"negative and positive attract"</strong> could not be more true for us. You bring out a sense of comfort, 
+                  understanding, and laughter that is so incredibly hard to find in this world.
+                </p>
+
+                <p class="letter-para">
+                  Thank you for being someone so deeply understanding, for being the Garba Queen, for the endless hours of bak-bak, 
+                  and for staying genuine through it all. Never lose that cartoonish spark that makes you so unique.
+                </p>
+
+                <p class="letter-para">
+                  May this new year bring you soaring success, unmatched joy, peaceful days, and every single dream you carry in your heart.
+                </p>
+
+                <div class="letter-signoff">
+                  Thanking God for you today and always,<br>
+                  <strong>Your Constant Supporter & Friend ❤️</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="envelope-tip" id="envelopeTip">✉️ Tap the envelope to unseal and read</p>
+      </div>
+
+      <!-- FEATURE 7: DIGITAL SCRATCH CARD -->
+      <div class="glass-card scratch-section">
+        <div class="card-kicker">✦ SURPRISE #6: SPECIAL COUPON ✦</div>
+        <h2 class="card-heading">Scratch & Win Coupon 🎫</h2>
+        <p class="card-sub">Use your mouse or finger to scratch off the silver foil and reveal your reward!</p>
+
+        <div class="scratch-wrap">
+          <!-- The Hidden Reward -->
+          <div class="scratch-secret">
+            <div class="secret-icon">🎁✨</div>
+            <div class="secret-title">OFFICIAL WINNER</div>
+            <div class="secret-prize">
+              1x Unlimited Treat Of Your Choice + 100% Free Lifetime Pass To Annoy Me! 🍕🥤
+            </div>
+            <div class="secret-terms">
+              Valid Anywhere, Anytime • No Expiry Date For Cartoon
+            </div>
+          </div>
+
+          <!-- Silver Scratch Foil -->
+          <canvas id="scratchCanvas" width="340" height="200"></canvas>
+        </div>
+        <div class="scratch-status" id="scratchStatus">Scratch above to reveal: 0% uncovered</div>
+      </div>
+
+      <!-- FINAL CELEBRATION FOOTER -->
+      <footer class="celebration-footer">
+        <div class="footer-heart">💖</div>
+        <h2>HAPPYY BIRTHDAY ONCE AGAIN, CARTOON!</h2>
+        <p>Keep lighting up the world with your unmatched vibe ✨</p>
+      </footer>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
