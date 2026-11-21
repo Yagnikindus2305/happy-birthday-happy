@@ -28,13 +28,13 @@
       <span class="icon">🎵</span>
       <span class="label">Play Birthday Beat</span>
     </div>
-    <div class="audio-pill hidden" id="garbaModeBtn" role="button" tabindex="0">
+    <div class="audio-pill" id="garbaModeBtn" role="button" tabindex="0">
       <span class="icon">💃</span>
       <span class="label">Garba Disco Mode</span>
     </div>
     <div class="audio-pill hidden" id="resetBtn" role="button" tabindex="0">
       <span class="icon">🔄</span>
-      <span class="label">Replay Unboxing</span>
+      <span class="label">Pack Up & Replay</span>
     </div>
   </header>
 
@@ -51,81 +51,17 @@
   <main class="viewport-wrap">
 
     <!-- ==============================================
-         STAGE 0: THE TIME-LOCK VAULT (UNTIL NOV 22, 2026, 00:00:00)
+         STAGE 1: THE UNBOXING MYSTERY PARCEL (Active by default!)
     =============================================== -->
-    <section class="vault-stage" id="vaultStage">
-      <div class="vault-container">
-        
-        <div class="lock-shield" id="lockShield" role="button" tabindex="0" title="Click to test lock!">
-          <div class="lock-shackle" id="lockShackle"></div>
-          <div class="lock-body">
-            <span class="lock-keyhole">🔒</span>
-          </div>
-          <div class="lock-glow"></div>
-        </div>
-
-        <div class="vault-tag">TOP SECRET • TIME-LOCKED DELIVERY</div>
-        <h1 class="vault-title">Strictly Locked Until Midnight!</h1>
-        <p class="vault-recipient">Special Birthday Parcel for: <strong>Happy Patel (Cartoon 🤪)</strong></p>
-
-        <!-- LIVE COUNTDOWN DISPLAY -->
-        <div class="countdown-grid" id="countdownGrid">
-          <div class="time-card">
-            <span class="time-digit" id="cdHours">00</span>
-            <span class="time-label">HOURS</span>
-          </div>
-          <div class="time-colon">:</div>
-          <div class="time-card">
-            <span class="time-digit" id="cdMinutes">00</span>
-            <span class="time-label">MINUTES</span>
-          </div>
-          <div class="time-colon">:</div>
-          <div class="time-card">
-            <span class="time-digit" id="cdSeconds">00</span>
-            <span class="time-label">SECONDS</span>
-          </div>
-        </div>
-
-        <p class="vault-note">
-          ⏳ The system will automatically unlock at exactly <strong>12:00:00 AM on November 22, 2026</strong>!
-        </p>
-
-        <div class="vault-actions">
-          <button class="vault-try-btn" id="tryUnlockBtn">🔓 Try To Open Early</button>
-          <div class="lock-alert hidden" id="lockAlert">
-            🚨 <strong>Access Denied!</strong> Nice try, Cartoon! No peeking before midnight! 🤪
-          </div>
-        </div>
-
-        <div class="manifesto-card">
-          <div class="manifesto-header">📦 PARCEL MANIFESTO</div>
-          <ul>
-            <li>✨ <strong>Contents:</strong> 1x Garba Queen, 1000 Hours of Bak-Bak, 100% Unfiltered Drama</li>
-            <li>🧲 <strong>Status:</strong> Opposites Attracting in Transit...</li>
-            <li>🔒 <strong>Security Clearance:</strong> Required Date: November 22, 2026</li>
-          </ul>
-        </div>
-
-        <!-- Secret preview bypass button for testing -->
-        <button class="preview-bypass-btn" id="previewBypassBtn" title="Test unlocked website now">
-          🛠️ Preview Mode (Unlock Now)
-        </button>
-
-      </div>
-    </section>
-
-    <!-- ==============================================
-         STAGE 1: THE UNBOXING MYSTERY PARCEL
-    =============================================== -->
-    <section class="box-stage hidden" id="boxStage">
+    <section class="box-stage" id="boxStage">
       <div class="cosmic-badge">
         <span class="sparkle">✨</span>
-        <span>MIDNIGHT SPECIAL DELIVERY</span>
+        <span>SPECIAL BIRTHDAY DELIVERY</span>
         <span class="sparkle">✨</span>
       </div>
 
-      <h2 class="sub-headline">The Vault is Open! You've Got a Parcel...</h2>
-      <p class="unbox-prompt">Tap or click the gift box to break the seal and unpack your surprise!</p>
+      <h2 class="sub-headline">A Special Parcel Just Arrived...</h2>
+      <p class="unbox-prompt">Tap or click the gift box below to break the seal and unpack your surprise!</p>
 
       <div class="gift-box-wrapper" id="giftBoxContainer" role="button" tabindex="0" aria-label="Open gift box">
         <div class="gift-box" id="giftBox">
@@ -173,7 +109,7 @@
       
       <!-- GIGANTIC CINEMATIC HEADLINE -->
       <div class="hero-block">
-        <div class="hero-tag">IT IS OFFICIALLY NOVEMBER 22, 2026 🎉</div>
+        <div class="hero-tag">CELEBRATING THE ONE & ONLY QUEEN 🎉</div>
         <h1 class="mega-title">
           <span>HAPPYY</span>
           <span class="highlight">BIRTHDAY</span>
@@ -336,7 +272,6 @@
         </p>
 
         <div class="video-container confidential-border">
-          <!-- strictly muted video as explicitly requested! -->
           <video 
             src="assets/our bak bak.mp4" 
             muted 

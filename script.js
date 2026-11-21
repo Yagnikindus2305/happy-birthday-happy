@@ -1,91 +1,10 @@
 // ==========================================
-// 1. TIME LOCK CONTROLLER (NOVEMBER 22, 2026, 00:00:00 IST)
+// 1. STAGES & NAVIGATION
 // ==========================================
-// Set target to November 22, 2026 00:00:00 in India Standard Time (+05:30)
-const TARGET_TIME = new Date('2026-11-22T00:00:00+05:30').getTime();
-
-const vaultStage = document.getElementById('vaultStage');
 const boxStage = document.getElementById('boxStage');
 const celebrationStage = document.getElementById('celebrationStage');
-const cdHours = document.getElementById('cdHours');
-const cdMinutes = document.getElementById('cdMinutes');
-const cdSeconds = document.getElementById('cdSeconds');
-const tryUnlockBtn = document.getElementById('tryUnlockBtn');
-const lockShield = document.getElementById('lockShield');
-const lockAlert = document.getElementById('lockAlert');
-const previewBypassBtn = document.getElementById('previewBypassBtn');
 const garbaModeBtn = document.getElementById('garbaModeBtn');
 const resetBtn = document.getElementById('resetBtn');
-
-let isUnlocked = false;
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const diff = TARGET_TIME - now;
-
-  // Check URL query for preview bypass
-  const urlParams = new URLSearchParams(window.location.search);
-  const previewParam = urlParams.get('preview') === 'true';
-
-  if (diff <= 0 || previewParam) {
-    if (!isUnlocked) {
-      triggerMidnightUnlock();
-    }
-    return;
-  }
-
-  // Calculate time components
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  cdHours.textContent = String(hours).padStart(2, '0');
-  cdMinutes.textContent = String(minutes).padStart(2, '0');
-  cdSeconds.textContent = String(seconds).padStart(2, '0');
-}
-
-function triggerMidnightUnlock() {
-  isUnlocked = true;
-  vaultStage.classList.add('hidden');
-  boxStage.classList.remove('hidden');
-  garbaModeBtn.classList.remove('hidden');
-
-  sound.playFanfare();
-
-  if (window.confetti) {
-    confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
-  }
-}
-
-// Check timer every second
-const countdownTimer = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// Try to open early behavior
-const denyMessages = [
-  "🚨 Nice try, Cartoon! No peeking before midnight! 🤪",
-  "🔒 Security Alarm: Cartoon detected attempting early breach! 🚔",
-  "⏳ Patience, Garba Queen! Good things come at 12:00 sharp! 💃",
-  "🙅 Access strictly denied until Nov 22! Go watch cartoons till then! 😂"
-];
-let denyIdx = 0;
-
-tryUnlockBtn.addEventListener('click', () => {
-  lockShield.classList.add('shaking');
-  sound.playTone(220, 'sawtooth', 0.25, 0.2);
-
-  lockAlert.innerHTML = denyMessages[denyIdx % denyMessages.length];
-  lockAlert.classList.remove('hidden');
-  denyIdx++;
-
-  setTimeout(() => lockShield.classList.remove('shaking'), 450);
-});
-
-// Secret bypass for testing
-previewBypassBtn.addEventListener('click', () => {
-  triggerMidnightUnlock();
-});
-
 
 // ==========================================
 // 2. WEB AUDIO API SYNTHESIZER
@@ -218,6 +137,7 @@ function openMysteryBox() {
     boxStage.classList.add('hidden');
     celebrationStage.classList.remove('hidden');
     resetBtn.classList.remove('hidden');
+    garbaModeBtn.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     initScratchCard();
   }, 850);
