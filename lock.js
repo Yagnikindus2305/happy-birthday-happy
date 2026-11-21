@@ -69,21 +69,30 @@ const denyMessages = [
 ];
 let denyIdx = 0;
 
+function triggerLockDenial(e) {
+  if (e) {
+    if (e.cancelable) e.preventDefault();
+  }
+  if (lockShield) lockShield.classList.add('shaking');
+  playBuzzTone();
+
+  if (lockAlert) {
+    lockAlert.innerHTML = denyMessages[denyIdx % denyMessages.length];
+    lockAlert.classList.remove('hidden');
+  }
+  denyIdx++;
+
+  setTimeout(() => {
+    if (lockShield) lockShield.classList.remove('shaking');
+  }, 450);
+}
+
 if (tryUnlockBtn) {
-  tryUnlockBtn.addEventListener('click', () => {
-    if (lockShield) lockShield.classList.add('shaking');
-    playBuzzTone();
+  tryUnlockBtn.addEventListener('click', triggerLockDenial);
+}
 
-    if (lockAlert) {
-      lockAlert.innerHTML = denyMessages[denyIdx % denyMessages.length];
-      lockAlert.classList.remove('hidden');
-    }
-    denyIdx++;
-
-    setTimeout(() => {
-      if (lockShield) lockShield.classList.remove('shaking');
-    }, 450);
-  });
+if (lockShield) {
+  lockShield.addEventListener('click', triggerLockDenial);
 }
 
 // Ambient floating bubbles/balloons
