@@ -290,55 +290,80 @@ body.garba-disco-active {
   margin-bottom: 28px;
 }
 
-/* Digital Countdown */
+/* Digital Countdown - Strict Horizontal Display */
 .countdown-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 22px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin: 24px 0 16px !important;
+  width: 100% !important;
+  max-width: 500px !important;
 }
 
 .time-card {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 209, 102, 0.4);
-  border-radius: 16px;
-  padding: 14px 18px;
-  min-width: 85px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 2px solid rgba(255, 209, 102, 0.45) !important;
+  border-radius: 18px !important;
+  padding: 16px 14px !important;
+  flex: 1 !important;
+  max-width: 110px !important;
+  min-width: 80px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 209, 102, 0.15) !important;
 }
 
 .time-digit {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 900;
-  color: var(--gold);
-  line-height: 1;
-  text-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.2rem, 5vw, 3.2rem) !important;
+  font-weight: 900 !important;
+  color: var(--gold) !important;
+  line-height: 1 !important;
+  display: block !important;
+  text-shadow: 0 0 20px rgba(255, 209, 102, 0.7) !important;
 }
 
 .time-label {
-  font-size: 0.65rem;
-  letter-spacing: 1.5px;
-  font-weight: 800;
-  color: #a4b0be;
-  margin-top: 6px;
+  font-size: 0.7rem !important;
+  letter-spacing: 2px !important;
+  font-weight: 800 !important;
+  color: #cbd5e1 !important;
+  margin-top: 6px !important;
+  display: block !important;
 }
 
 .time-colon {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: var(--gold);
-  margin-top: -15px;
-  animation: blinkColon 1s infinite;
+  font-size: 2.2rem !important;
+  font-weight: 900 !important;
+  color: var(--gold) !important;
+  margin-top: -18px !important;
+  animation: blinkColon 1s infinite !important;
 }
 
-@keyframes blinkColon {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+.admin-preview-link {
+  margin-top: 24px;
+}
+
+.preview-direct-btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(255, 209, 102, 0.5);
+  color: var(--gold);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.preview-direct-btn:hover {
+  background: rgba(255, 209, 102, 0.2);
+  transform: translateY(-2px);
 }
 
 .vault-note {
@@ -405,24 +430,6 @@ body.garba-disco-active {
 
 .manifesto-card strong {
   color: #fff;
-}
-
-.preview-bypass-btn {
-  margin-top: 24px;
-  background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.35);
-  color: rgba(255, 255, 255, 0.6);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.preview-bypass-btn:hover {
-  color: #fff;
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 
