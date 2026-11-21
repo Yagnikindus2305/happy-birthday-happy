@@ -1,5 +1,94 @@
 // ==========================================
-// 1. WEB AUDIO API SYNTHESIZER
+// 1. TIME LOCK CONTROLLER (NOVEMBER 22, 2026, 00:00:00 IST)
+// ==========================================
+// Set target to November 22, 2026 00:00:00 in India Standard Time (+05:30)
+const TARGET_TIME = new Date('2026-11-22T00:00:00+05:30').getTime();
+
+const vaultStage = document.getElementById('vaultStage');
+const boxStage = document.getElementById('boxStage');
+const celebrationStage = document.getElementById('celebrationStage');
+const cdHours = document.getElementById('cdHours');
+const cdMinutes = document.getElementById('cdMinutes');
+const cdSeconds = document.getElementById('cdSeconds');
+const tryUnlockBtn = document.getElementById('tryUnlockBtn');
+const lockShield = document.getElementById('lockShield');
+const lockAlert = document.getElementById('lockAlert');
+const previewBypassBtn = document.getElementById('previewBypassBtn');
+const garbaModeBtn = document.getElementById('garbaModeBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+let isUnlocked = false;
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = TARGET_TIME - now;
+
+  // Check URL query for preview bypass
+  const urlParams = new URLSearchParams(window.location.search);
+  const previewParam = urlParams.get('preview') === 'true';
+
+  if (diff <= 0 || previewParam) {
+    if (!isUnlocked) {
+      triggerMidnightUnlock();
+    }
+    return;
+  }
+
+  // Calculate time components
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  cdHours.textContent = String(hours).padStart(2, '0');
+  cdMinutes.textContent = String(minutes).padStart(2, '0');
+  cdSeconds.textContent = String(seconds).padStart(2, '0');
+}
+
+function triggerMidnightUnlock() {
+  isUnlocked = true;
+  vaultStage.classList.add('hidden');
+  boxStage.classList.remove('hidden');
+  garbaModeBtn.classList.remove('hidden');
+
+  sound.playFanfare();
+
+  if (window.confetti) {
+    confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
+  }
+}
+
+// Check timer every second
+const countdownTimer = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Try to open early behavior
+const denyMessages = [
+  "🚨 Nice try, Cartoon! No peeking before midnight! 🤪",
+  "🔒 Security Alarm: Cartoon detected attempting early breach! 🚔",
+  "⏳ Patience, Garba Queen! Good things come at 12:00 sharp! 💃",
+  "🙅 Access strictly denied until Nov 22! Go watch cartoons till then! 😂"
+];
+let denyIdx = 0;
+
+tryUnlockBtn.addEventListener('click', () => {
+  lockShield.classList.add('shaking');
+  sound.playTone(220, 'sawtooth', 0.25, 0.2);
+
+  lockAlert.innerHTML = denyMessages[denyIdx % denyMessages.length];
+  lockAlert.classList.remove('hidden');
+  denyIdx++;
+
+  setTimeout(() => lockShield.classList.remove('shaking'), 450);
+});
+
+// Secret bypass for testing
+previewBypassBtn.addEventListener('click', () => {
+  triggerMidnightUnlock();
+});
+
+
+// ==========================================
+// 2. WEB AUDIO API SYNTHESIZER
 // ==========================================
 class SoundFX {
   constructor() {
@@ -38,8 +127,8 @@ class SoundFX {
   }
 
   playPop() {
-    this.playTone(480, 'sine', 0.1, 0.2);
-    setTimeout(() => this.playTone(880, 'triangle', 0.1, 0.15), 30);
+    this.playTone(520, 'sine', 0.08, 0.18);
+    setTimeout(() => this.playTone(920, 'triangle', 0.1, 0.14), 25);
   }
 
   playFanfare() {
@@ -70,7 +159,7 @@ class SoundFX {
     btn.classList.add('playing');
     btn.querySelector('.label').textContent = 'Pause Music';
 
-    // Happy Birthday Chime
+    // Cheerful Happy Birthday Chime Melody
     const melody = [
       [264, 0.75], [264, 0.25], [297, 1], [264, 1], [352, 1], [330, 2],
       [264, 0.75], [264, 0.25], [297, 1], [264, 1], [396, 1], [352, 2],
@@ -107,12 +196,9 @@ const sound = new SoundFX();
 
 
 // ==========================================
-// 2. UNBOXING REVEAL
+// 3. UNBOXING REVEAL
 // ==========================================
 const giftBoxContainer = document.getElementById('giftBoxContainer');
-const boxStage = document.getElementById('boxStage');
-const celebrationStage = document.getElementById('celebrationStage');
-const resetBtn = document.getElementById('resetBtn');
 
 function openMysteryBox() {
   if (giftBoxContainer.classList.contains('unwrapping')) return;
@@ -120,14 +206,8 @@ function openMysteryBox() {
   giftBoxContainer.classList.add('unwrapping');
   sound.playFanfare();
 
-  // Dual confetti blast
   if (window.confetti) {
-    confetti({
-      particleCount: 120,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-
+    confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
     setTimeout(() => {
       confetti({ particleCount: 90, angle: 60, spread: 60, origin: { x: 0 } });
       confetti({ particleCount: 90, angle: 120, spread: 60, origin: { x: 1 } });
@@ -161,20 +241,12 @@ resetBtn.addEventListener('click', () => {
 
 
 // ==========================================
-// 3. CAKE CANDLES BLOW-OUT
+// 4. CAKE CANDLES BLOW-OUT
 // ==========================================
 const cakeInteractive = document.getElementById('cakeInteractive');
 const blowBtn = document.getElementById('blowBtn');
-const flames = [
-  document.getElementById('flame1'),
-  document.getElementById('flame2'),
-  document.getElementById('flame3')
-];
-const smokes = [
-  document.getElementById('smoke1'),
-  document.getElementById('smoke2'),
-  document.getElementById('smoke3')
-];
+const flames = [document.getElementById('flame1'), document.getElementById('flame2'), document.getElementById('flame3')];
+const smokes = [document.getElementById('smoke1'), document.getElementById('smoke2'), document.getElementById('smoke3')];
 let blown = false;
 
 function extinguishCandles() {
@@ -185,7 +257,6 @@ function extinguishCandles() {
   smokes.forEach(s => s.classList.add('active'));
 
   sound.playWishChime();
-
   blowBtn.textContent = '✨ WISH MADE! HAPPY BIRTHDAY CARTOON! ✨';
   blowBtn.classList.add('done');
 
@@ -205,7 +276,41 @@ blowBtn.addEventListener('click', extinguishCandles);
 
 
 // ==========================================
-// 4. PHOTO MODAL ZOOMING
+// 5. CARTOON ROAST & COMPLIMENT MACHINE
+// ==========================================
+const roastDisplay = document.getElementById('roastDisplay');
+const nextRoastBtn = document.getElementById('nextRoastBtn');
+
+const cartoonFacts = [
+  "Scientifically proven to have the most expressive face and loudest laugh in any room! 😂✨",
+  "Warning: Engaging in bak-bak with Cartoon may cause severe loss of track of time! 🗣️⏳",
+  "Certified Garba Queen: When the dhol drops, normal human physics no longer applies to her! 💃🔥",
+  "They say negative & positive attract... thank God, because who else could handle all this drama?! 🧲❤️",
+  "Ability to turn a 2-minute normal story into a 45-minute Bollywood thriller! 🎭🍿",
+  "Never pretend you understand her mood swings, just nod, smile, and order snacks! 🍕🥤",
+  "The rarest post-school blessing: someone genuinely understanding, loyal, and 100% real. ✨",
+  "Diagnosis: Terminal Cartoon Syndrome (Curable only by unlimited compliments & food). 🩺🤪"
+];
+let lastRoastIdx = 0;
+
+nextRoastBtn.addEventListener('click', () => {
+  let newIdx;
+  do {
+    newIdx = Math.floor(Math.random() * cartoonFacts.length);
+  } while (newIdx === lastRoastIdx);
+  lastRoastIdx = newIdx;
+
+  roastDisplay.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    roastDisplay.textContent = `"${cartoonFacts[newIdx]}"`;
+    roastDisplay.style.transform = 'scale(1)';
+    sound.playTone(580, 'sine', 0.15, 0.12);
+  }, 150);
+});
+
+
+// ==========================================
+// 6. PHOTO MODAL ZOOMING
 // ==========================================
 const photoFrames = document.querySelectorAll('.polaroid-frame');
 const photoModal = document.getElementById('photoModal');
@@ -233,7 +338,7 @@ modalBackdrop.addEventListener('click', closeModal);
 
 
 // ==========================================
-// 5. WAX SEALED ENVELOPE
+// 7. WAX SEALED ENVELOPE
 // ==========================================
 const envelopeBox = document.getElementById('envelopeBox');
 const envelopeTip = document.getElementById('envelopeTip');
@@ -254,7 +359,7 @@ envelopeBox.addEventListener('click', () => {
 
 
 // ==========================================
-// 6. SCRATCH CARD
+// 8. SCRATCH CARD
 // ==========================================
 let scratchDone = false;
 
@@ -268,7 +373,6 @@ function initScratchCard() {
   let isDown = false;
   let revealed = false;
 
-  // Foil Shimmer Background
   const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
   gradient.addColorStop(0, '#bdc3c7');
   gradient.addColorStop(0.3, '#ecf0f1');
@@ -342,7 +446,54 @@ function initScratchCard() {
 
 
 // ==========================================
-// 7. AMBIENT POP-ABLE BALLOONS
+// 9. GARBA DISCO MODE TOGGLE
+// ==========================================
+let garbaDisco = false;
+
+garbaModeBtn.addEventListener('click', () => {
+  garbaDisco = !garbaDisco;
+  document.body.classList.toggle('garba-disco-active', garbaDisco);
+
+  if (garbaDisco) {
+    garbaModeBtn.classList.add('playing');
+    garbaModeBtn.querySelector('.label').textContent = 'Exit Garba Mode';
+    sound.playTone(784, 'triangle', 0.3, 0.25);
+    if (window.confetti) {
+      confetti({ particleCount: 50, spread: 80, origin: { y: 0.3 } });
+    }
+  } else {
+    garbaModeBtn.classList.remove('playing');
+    garbaModeBtn.querySelector('.label').textContent = 'Garba Disco Mode';
+  }
+});
+
+
+// ==========================================
+// 10. TAP TO SEND BIRTHDAY LOVE
+// ==========================================
+const loveTapBtn = document.getElementById('loveTapBtn');
+const loveBadge = document.getElementById('loveBadge');
+let loveCount = 0;
+const heartSymbols = ['💖', '❤️', '💃', '✨', '⭐', '🎈'];
+
+loveTapBtn.addEventListener('click', (e) => {
+  loveCount++;
+  loveBadge.textContent = loveCount;
+  sound.playPop();
+
+  const heart = document.createElement('div');
+  heart.className = 'floating-love-heart';
+  heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+  heart.style.left = `${e.clientX - 15}px`;
+  heart.style.top = `${e.clientY - 15}px`;
+
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 1400);
+});
+
+
+// ==========================================
+// 11. AMBIENT POP-ABLE BALLOONS
 // ==========================================
 const ambientLayer = document.getElementById('ambientLayer');
 const colors = ['#ff007f', '#ffd166', '#00ff88', '#00d2d3', '#a29bfe', '#ff4757'];

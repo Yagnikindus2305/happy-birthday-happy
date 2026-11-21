@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HAPPYY BIRTHDAY HAPPYY! 🎂✨ (To My Favorite Cartoon)</title>
   
-  <!-- Fonts -->
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sacramento&display=swap" rel="stylesheet">
@@ -16,9 +16,10 @@
 </head>
 <body>
 
-  <!-- Background Ambience & Floating Elements -->
-  <div class="ambient-layer" id="ambientLayer"></div>
+  <!-- Ambient Stars & Canvas Layer -->
   <div class="stars-bg"></div>
+  <div class="ambient-layer" id="ambientLayer"></div>
+  <div class="garba-sparks-layer" id="garbaSparksLayer"></div>
 
   <!-- Top Floating Controls -->
   <header class="top-bar">
@@ -26,6 +27,10 @@
       <span class="pulse-dot"></span>
       <span class="icon">🎵</span>
       <span class="label">Play Birthday Beat</span>
+    </div>
+    <div class="audio-pill hidden" id="garbaModeBtn" role="button" tabindex="0">
+      <span class="icon">💃</span>
+      <span class="label">Garba Disco Mode</span>
     </div>
     <div class="audio-pill hidden" id="resetBtn" role="button" tabindex="0">
       <span class="icon">🔄</span>
@@ -46,17 +51,81 @@
   <main class="viewport-wrap">
 
     <!-- ==============================================
+         STAGE 0: THE TIME-LOCK VAULT (UNTIL NOV 22, 2026, 00:00:00)
+    =============================================== -->
+    <section class="vault-stage" id="vaultStage">
+      <div class="vault-container">
+        
+        <div class="lock-shield" id="lockShield" role="button" tabindex="0" title="Click to test lock!">
+          <div class="lock-shackle" id="lockShackle"></div>
+          <div class="lock-body">
+            <span class="lock-keyhole">🔒</span>
+          </div>
+          <div class="lock-glow"></div>
+        </div>
+
+        <div class="vault-tag">TOP SECRET • TIME-LOCKED DELIVERY</div>
+        <h1 class="vault-title">Strictly Locked Until Midnight!</h1>
+        <p class="vault-recipient">Special Birthday Parcel for: <strong>Happy Patel (Cartoon 🤪)</strong></p>
+
+        <!-- LIVE COUNTDOWN DISPLAY -->
+        <div class="countdown-grid" id="countdownGrid">
+          <div class="time-card">
+            <span class="time-digit" id="cdHours">00</span>
+            <span class="time-label">HOURS</span>
+          </div>
+          <div class="time-colon">:</div>
+          <div class="time-card">
+            <span class="time-digit" id="cdMinutes">00</span>
+            <span class="time-label">MINUTES</span>
+          </div>
+          <div class="time-colon">:</div>
+          <div class="time-card">
+            <span class="time-digit" id="cdSeconds">00</span>
+            <span class="time-label">SECONDS</span>
+          </div>
+        </div>
+
+        <p class="vault-note">
+          ⏳ The system will automatically unlock at exactly <strong>12:00:00 AM on November 22, 2026</strong>!
+        </p>
+
+        <div class="vault-actions">
+          <button class="vault-try-btn" id="tryUnlockBtn">🔓 Try To Open Early</button>
+          <div class="lock-alert hidden" id="lockAlert">
+            🚨 <strong>Access Denied!</strong> Nice try, Cartoon! No peeking before midnight! 🤪
+          </div>
+        </div>
+
+        <div class="manifesto-card">
+          <div class="manifesto-header">📦 PARCEL MANIFESTO</div>
+          <ul>
+            <li>✨ <strong>Contents:</strong> 1x Garba Queen, 1000 Hours of Bak-Bak, 100% Unfiltered Drama</li>
+            <li>🧲 <strong>Status:</strong> Opposites Attracting in Transit...</li>
+            <li>🔒 <strong>Security Clearance:</strong> Required Date: November 22, 2026</li>
+          </ul>
+        </div>
+
+        <!-- Secret preview bypass button for testing -->
+        <button class="preview-bypass-btn" id="previewBypassBtn" title="Test unlocked website now">
+          🛠️ Preview Mode (Unlock Now)
+        </button>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
          STAGE 1: THE UNBOXING MYSTERY PARCEL
     =============================================== -->
-    <section class="box-stage" id="boxStage">
+    <section class="box-stage hidden" id="boxStage">
       <div class="cosmic-badge">
         <span class="sparkle">✨</span>
-        <span>PRIORITY SPECIAL DELIVERY</span>
+        <span>MIDNIGHT SPECIAL DELIVERY</span>
         <span class="sparkle">✨</span>
       </div>
 
-      <h2 class="sub-headline">A Special Parcel Just Arrived...</h2>
-      <p class="unbox-prompt">Tap or click the gift box to break the seal!</p>
+      <h2 class="sub-headline">The Vault is Open! You've Got a Parcel...</h2>
+      <p class="unbox-prompt">Tap or click the gift box to break the seal and unpack your surprise!</p>
 
       <div class="gift-box-wrapper" id="giftBoxContainer" role="button" tabindex="0" aria-label="Open gift box">
         <div class="gift-box" id="giftBox">
@@ -93,7 +162,7 @@
       </div>
 
       <div class="hint-arrow">
-        <span>👇 Click the box to begin your surprise!</span>
+        <span>👇 Click the box to begin your birthday unboxing!</span>
       </div>
     </section>
 
@@ -104,7 +173,7 @@
       
       <!-- GIGANTIC CINEMATIC HEADLINE -->
       <div class="hero-block">
-        <div class="hero-tag">THE MOST SPECIAL DAY OF THE YEAR</div>
+        <div class="hero-tag">IT IS OFFICIALLY NOVEMBER 22, 2026 🎉</div>
         <h1 class="mega-title">
           <span>HAPPYY</span>
           <span class="highlight">BIRTHDAY</span>
@@ -148,7 +217,53 @@
         </div>
       </div>
 
-      <!-- FEATURE 2: THE INTERACTIVE CAKE -->
+      <!-- FEATURE 2: THE CARTOON-O-METER (PERSONALITY SCANNER) -->
+      <div class="glass-card meter-card">
+        <div class="card-kicker">✦ CERTIFIED AI DIAGNOSTIC ✦</div>
+        <h2 class="card-heading">The Official Cartoon-O-Meter 🎛️🔍</h2>
+        <p class="card-sub">Real-time biological analysis of Happy Patel's personality traits:</p>
+
+        <div class="meter-grid">
+          <div class="meter-item">
+            <div class="meter-label-row">
+              <span>🎭 Drama & Expressions</span>
+              <span class="meter-value">99.8%</span>
+            </div>
+            <div class="progress-bar"><div class="fill fill-drama" style="width: 99.8%"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div class="meter-label-row">
+              <span>💃 Garba Energy (Dhol Detection)</span>
+              <span class="meter-value">1000%</span>
+            </div>
+            <div class="progress-bar"><div class="fill fill-garba" style="width: 100%"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div class="meter-label-row">
+              <span>🗣️ Non-Stop Bak-Bak Capacity</span>
+              <span class="meter-value">Infinite</span>
+            </div>
+            <div class="progress-bar"><div class="fill fill-bakbak" style="width: 100%"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div class="meter-label-row">
+              <span>❤️ Pure Golden Heart & Understanding</span>
+              <span class="meter-value">100.0%</span>
+            </div>
+            <div class="progress-bar"><div class="fill fill-heart" style="width: 100%"></div></div>
+          </div>
+        </div>
+
+        <div class="meter-verdict">
+          <span class="verdict-badge">FINAL VERDICT:</span>
+          <p><strong>100% Certified Cartoon.</strong> Irreplaceable, hilarious, and genuinely one-of-a-kind!</p>
+        </div>
+      </div>
+
+      <!-- FEATURE 3: THE INTERACTIVE CAKE -->
       <div class="glass-card cake-card">
         <div class="card-kicker">✦ SURPRISE #1: TRADITION ✦</div>
         <h2 class="card-heading">Blow Your Birthday Candles 🎂</h2>
@@ -171,15 +286,9 @@
           </div>
 
           <div class="cake-structure">
-            <div class="cake-tier tier-1">
-              <div class="cream-drips"></div>
-            </div>
-            <div class="cake-tier tier-2">
-              <div class="sprinkle-dots"></div>
-            </div>
-            <div class="cake-tier tier-3">
-              <div class="gold-rim"></div>
-            </div>
+            <div class="cake-tier tier-1"><div class="cream-drips"></div></div>
+            <div class="cake-tier tier-2"><div class="sprinkle-dots"></div></div>
+            <div class="cake-tier tier-3"><div class="gold-rim"></div></div>
             <div class="cake-plate"></div>
           </div>
         </div>
@@ -187,7 +296,7 @@
         <button class="primary-btn" id="blowBtn">💨 Blow Out The Candles!</button>
       </div>
 
-      <!-- FEATURE 3: GARBA QUEEN VIDEO SPOTLIGHT -->
+      <!-- FEATURE 4: GARBA QUEEN VIDEO SPOTLIGHT -->
       <div class="glass-card video-card garba-spotlight">
         <div class="card-kicker">✦ SURPRISE #2: THE ROYAL DANCE FLOOR ✦</div>
         <div class="garba-title-row">
@@ -211,11 +320,11 @@
           </video>
         </div>
         <div class="video-caption">
-          <span>✨ Navratri superstar mode: Activated! ✨</span>
+          <span>✨ Navratri superstar mode: Activated! (Toggle Garba Disco Mode above!) ✨</span>
         </div>
       </div>
 
-      <!-- FEATURE 4: OUR BAK BAK SESSIONS (MUTED FOR SAFETY!) -->
+      <!-- FEATURE 5: OUR BAK BAK SESSIONS (MUTED FOR SAFETY!) -->
       <div class="glass-card video-card bakbak-spotlight">
         <div class="card-kicker">✦ SURPRISE #3: TOP SECRET ARCHIVES ✦</div>
         <div class="bakbak-header">
@@ -247,72 +356,69 @@
         </div>
       </div>
 
-      <!-- FEATURE 5: MEMORY PHOTO GALLERY (PHOTOS 1 to 6) -->
+      <!-- FEATURE 6: CARTOON COMPLIMENT & ROAST GENERATOR -->
+      <div class="glass-card roast-card">
+        <div class="card-kicker">✦ SURPRISE #4: DAILY CARTOON DOSE ✦</div>
+        <h2 class="card-heading">Cartoon Vibe Generator 🎲✨</h2>
+        <p class="card-sub">Tap the button below to draw random inside thoughts & certified facts about Happy:</p>
+        
+        <div class="roast-box" id="roastDisplay">
+          "Scientifically proven to have the most expressive face and loudest laugh in any room! 😂✨"
+        </div>
+
+        <button class="primary-btn secondary-btn" id="nextRoastBtn">
+          🎲 Tap For Another Fact!
+        </button>
+      </div>
+
+      <!-- FEATURE 7: MEMORY PHOTO GALLERY (PHOTOS 1 to 6) -->
       <div class="glass-card gallery-card">
-        <div class="card-kicker">✦ SURPRISE #4: THE CARTOON CHRONICLES ✦</div>
+        <div class="card-kicker">✦ SURPRISE #5: THE CARTOON CHRONICLES ✦</div>
         <h2 class="card-heading">Moments With The Birthday Star 📸</h2>
         <p class="card-sub">Click any photo to see it in full view!</p>
 
         <div class="photo-grid">
-          <!-- Photo 1 -->
           <div class="polaroid-frame" data-src="assets/1.jpeg" data-caption="The radiant smile that brightens any room! ✨">
             <div class="washi-tape tape-1"></div>
-            <div class="photo-crop">
-              <img src="assets/1.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/1.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">The Radiant Smile ✨</div>
           </div>
 
-          <!-- Photo 2 -->
           <div class="polaroid-frame" data-src="assets/2.jpeg" data-caption="Grace, beauty & elegance at its finest 🌸">
             <div class="washi-tape tape-2"></div>
-            <div class="photo-crop">
-              <img src="assets/2.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/2.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">Simply Stunning 🌸</div>
           </div>
 
-          <!-- Photo 3 -->
           <div class="polaroid-frame" data-src="assets/3.jpeg" data-caption="Unfiltered Cartoon energy on full display! 🤪">
             <div class="washi-tape tape-3"></div>
-            <div class="photo-crop">
-              <img src="assets/3.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/3.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">Peak Cartoon Vibe 🤪</div>
           </div>
 
-          <!-- Photo 4 -->
           <div class="polaroid-frame" data-src="assets/4.jpeg" data-caption="Unmatched poise & style 💫">
             <div class="washi-tape tape-4"></div>
-            <div class="photo-crop">
-              <img src="assets/4.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/4.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">Class & Poise 💫</div>
           </div>
 
-          <!-- Photo 5 -->
           <div class="polaroid-frame" data-src="assets/5.jpeg" data-caption="Candid perfection & pure happiness ❤️">
             <div class="washi-tape tape-5"></div>
-            <div class="photo-crop">
-              <img src="assets/5.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/5.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">Candid Happiness ❤️</div>
           </div>
 
-          <!-- Photo 6 -->
           <div class="polaroid-frame" data-src="assets/6.jpeg" data-caption="Here's to the queen of the day, Happy Patel! 🥂">
             <div class="washi-tape tape-6"></div>
-            <div class="photo-crop">
-              <img src="assets/6.jpeg" alt="Happy Patel" loading="lazy" />
-            </div>
+            <div class="photo-crop"><img src="assets/6.jpeg" alt="Happy Patel" loading="lazy" /></div>
             <div class="polaroid-text">Birthday Royalty 👑</div>
           </div>
         </div>
       </div>
 
-      <!-- FEATURE 6: WAX SEALED HEARTFELT LETTER -->
+      <!-- FEATURE 8: WAX SEALED HEARTFELT LETTER -->
       <div class="glass-card letter-section">
-        <div class="card-kicker">✦ SURPRISE #5: FROM THE SOUL ✦</div>
+        <div class="card-kicker">✦ SURPRISE #6: FROM THE SOUL ✦</div>
         <h2 class="card-heading">A Letter For You 💌</h2>
         <p class="card-sub">Click the wax seal to open your private letter.</p>
 
@@ -357,14 +463,13 @@
         <p class="envelope-tip" id="envelopeTip">✉️ Tap the envelope to unseal and read</p>
       </div>
 
-      <!-- FEATURE 7: DIGITAL SCRATCH CARD -->
+      <!-- FEATURE 9: DIGITAL SCRATCH CARD -->
       <div class="glass-card scratch-section">
-        <div class="card-kicker">✦ SURPRISE #6: SPECIAL COUPON ✦</div>
+        <div class="card-kicker">✦ SURPRISE #7: SPECIAL COUPON ✦</div>
         <h2 class="card-heading">Scratch & Win Coupon 🎫</h2>
         <p class="card-sub">Use your mouse or finger to scratch off the silver foil and reveal your reward!</p>
 
         <div class="scratch-wrap">
-          <!-- The Hidden Reward -->
           <div class="scratch-secret">
             <div class="secret-icon">🎁✨</div>
             <div class="secret-title">OFFICIAL WINNER</div>
@@ -376,10 +481,18 @@
             </div>
           </div>
 
-          <!-- Silver Scratch Foil -->
           <canvas id="scratchCanvas" width="340" height="200"></canvas>
         </div>
         <div class="scratch-status" id="scratchStatus">Scratch above to reveal: 0% uncovered</div>
+      </div>
+
+      <!-- FEATURE 10: TAP-TO-SEND-LOVE FLOATING HEARTS COUNTER -->
+      <div class="love-counter-bar">
+        <button class="love-tap-btn" id="loveTapBtn">
+          <span class="heart-icon">💖</span>
+          <span class="love-text">Send Birthday Love!</span>
+          <span class="love-badge" id="loveBadge">0</span>
+        </button>
       </div>
 
       <!-- FINAL CELEBRATION FOOTER -->
